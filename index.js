@@ -2,6 +2,7 @@ const { default: axios } = require('axios')
 const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
+const api = require('./api')
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded())
 const port = process.env.port || 3000
@@ -9,7 +10,7 @@ const port = process.env.port || 3000
 
 let i = ''
 const resolver = async (request, response) => {
-    const content = await axios.get('https://como-fazer-rzm-default-rtdb.firebaseio.com/teste.json')
+    const content = await axios.get(' ')
     response.render('index', { i: content.data })
 }
 
@@ -20,65 +21,36 @@ app.get('/categorias/nova', (req, res) => {
 })
 
 app.post('/categorias/nova', async (req, res) => {
-    await axios.post('https://como-fazer-rzm-default-rtdb.firebaseio.com/categorias.json/', {
+    await api.create('categorias', {
         categorias: req.body.categorias
     })
     res.redirect('/categorias')
 })
 
 app.get('/categorias', async (req, res) => {
-    const content = await axios.get('https://como-fazer-rzm-default-rtdb.firebaseio.com/categorias.json')
-    if (content.data) {
-
-        const categorias = Object
-            .keys(content.data)
-            .map(key => {
-                return {
-                    id: key,
-                    ...content.data[key]
-                }
-            })
-        res.render('categorias/index', { categorias: categorias })
-    } else {
-
-        res.render('categorias/index', { categorias: [] })
-    }
-
+    const categorias = await api.list('categorias')
+    res.render('categorias/index', { categorias })
 })
 
 app.get('/categorias/excluir/:id', async (req, res) => {
-    await axios.delete(`https://como-fazer-rzm-default-rtdb.firebaseio.com/categorias/${req.params.id}.json`)
+    await api.apagar('categorias', req.params.id)
     res.redirect('/categorias')
-
 })
 
 
 app.get('/categorias/editar/:id', async (req, res) => {
-    const content = await axios.get(`https://como-fazer-rzm-default-rtdb.firebaseio.com/categorias/${req.params.id}.json`)
+    const categoria = await api.get('categorias', req.params.id)
     res.render('categorias/editar', {
-
-        categoria: {
-            id: req.params.id,
-            ...content.data
-        }
-
-
+        categoria
     })
 })
 
 app.post('/categorias/editar/:id', async (req, res) => {
-    await axios.put(`https://como-fazer-rzm-default-rtdb.firebaseio.com/categorias/${req.params.id}.json/`, {
+    await api.update('categorias', req.params.id, {
         categorias: req.body.categorias
     })
     res.redirect('/categorias')
 })
-
-
-
-
-
-
-
 
 
 

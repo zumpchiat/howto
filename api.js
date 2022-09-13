@@ -21,10 +21,30 @@ const list = async(key) => {
 
 const apagar = async(key, id) => {
 
-    const content =  await axios.delete(baseURL + key + '/' +'.json')
+    const content =  await axios.delete(baseURL + key + '/' + id +'.json')
+    return true 
+}
+
+
+const get = async (key, id) => {
+    const content = await axios.get(`${baseURL}/${key}/${id}.json`)
+            return { 
+            id: id,
+            ...content.data
+        }   
+}
+
+const update = async (key, id, data) => {
+   await axios.put(`${baseURL}/${key}/${id}.json/`, data)
+   return true
+}
+
+const create = async (key, data) =>{
+    await axios.post(`${baseURL}/${key}.json/`, data)
     return true
 }
 
+
 module.exports = {  
-    list, apagar
+    list, apagar,get, update, create
 }
