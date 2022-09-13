@@ -19,6 +19,12 @@ const list = async(key) => {
     return []
 }
 
+const apagar = async(key, id) => {
+
+    const content =  await axios.delete(baseURL + key + '/' +'.json')
+    return true
+}
+
 module.exports = {  
-    list
+    list, apagar
 }
