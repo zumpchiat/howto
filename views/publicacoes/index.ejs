@@ -1,0 +1,23 @@
+  <%- include('../header') %> 
+
+<a class="btn btn-light" href="/publicacoes/nova">Nova Publicação</a><br >
+
+
+   <br>
+   <% publicacoes.forEach(publicacoes => { %>
+   <div class="card text-center" style="width: 18rem;">
+    <p> Date: <%= publicacoes.publicacoes[2] %></p>
+    <hr>
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= publicacoes.publicacoes[0] %><br ></h5>
+      <p class="card-text"><%= publicacoes.publicacoes[1] %><br ></p>
+      
+      <a href=href="/publicacoes/editar/<%= publicacoes.id %>" class="btn btn-primary">Editar</a>
+      <a href="/publicacoes/excluir/<%= publicacoes.id %>" class="btn btn-danger"> Excluir </a>
+    </div>
+  </div>
+  <br>
+  <% })  %> 
+
+<%- include('../footer') %> 

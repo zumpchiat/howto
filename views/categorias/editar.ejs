@@ -1,6 +1,21 @@
-<form method="POST" accept="/categorias/editar/"> 
-<input placeholder="Categoria" type="text" name="categorias" value="<%= categoria.categorias %>">
+<%- include('../header') %> 
 
-<button>Editar</button>
+
  
-</form>
+
+<form method="POST" accept="/categorias/editar/">
+    <div class="mb-3">
+      <label  class="form-label">Categoria</label>
+      <input class="form-control" placeholder="Categoria" type="text" name="categorias" value="<%= categoria.categorias %>">
+
+      </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </form>
+
+
+
+    
+
+
+
+<%- include('../footer') %> 

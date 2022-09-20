@@ -2,9 +2,13 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const categorias = require('./routes/categorias')
+const axios = require('axios')
 
-app.set('views', './views');
+
+const categorias = require('./routes/categorias')
+const publicacoes = require('./routes/publicacoes')
+
+
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded())
 
@@ -12,9 +16,12 @@ const port = process.env.port || 3000
 
 
 
-app.get('/', categorias)
+app.get('/', async (req, res) => {
+    res.render('index')
+})
 
 app.use('/categorias', categorias)
+app.use('/publicacoes', publicacoes)
 
 
 

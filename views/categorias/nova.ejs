@@ -1,6 +1,15 @@
-<form method="POST" accept="/categorias/nova"> 
-<input placeholder="Categoria" type="text" name="categorias">
+<%- include('../header') %>
 
-<button>Salvar</button>
+
+<form method="POST" accept="/categorias/nova"> 
+    <div class="mb-3">
+<label  class="form-label">Categoria</label>
+<input class="form-control" placeholder="Categoria" type="text" name="categorias">
+</div>
+<button type="submit" class="btn btn-primary">Salvar</button>
  
 </form>
+
+   
+
+<%- include('../footer') %> 

@@ -1,8 +1,33 @@
-<a href="/categorias/nova">Nova categoria</a><br >
-<% categorias.forEach(categoria => { %>
+<%- include('../header') %> 
 
-    <%= categoria.categorias %>
-     <a href="/categorias/editar/<%= categoria.id %>"> Editar</a>
-     <a href="/categorias/excluir/<%= categoria.id %>"> Excluir</a><br / >
-<% })  %>
+<a class="btn btn-light" href="/categorias/nova">Nova categoria</a><br >
 
+
+   <br>
+    
+
+<table class="table table-striped table-hover">
+  
+        <thead>
+          <tr>
+            <th scope="col">Nome Categoria</th>
+            <th scope="col">ações</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+        <% categorias.forEach(categoria => { %>
+          <tr>
+            <th scope="row"> <%= categoria.categorias %></th>
+            <td> <a href="/categorias/editar/<%= categoria.id %>"> Editar</a>
+                <a href="/categorias/excluir/<%= categoria.id %>"> Excluir</a>
+           </td>
+           
+          </tr>
+        <% })  %>
+      
+        </tbody>
+      
+  </table>
+
+<%- include('../footer') %> 
